@@ -1,15 +1,6 @@
 import kotlinx.browser.document
-import react.*
-import react.css.css
+import react.create
 import react.dom.render
-import csstype.Position
-import csstype.px
-import react.dom.html.ReactHTML.h1
-import react.dom.html.ReactHTML.h3
-import react.dom.html.ReactHTML.div
-import react.dom.html.ReactHTML.p
-import react.dom.html.ReactHTML.img
-import kotlinx.serialization.Serializable
 
 data class Video(
     val id: Int,
@@ -30,42 +21,5 @@ val watchedVideos = listOf(
 
 fun main() {
     val container = document.getElementById("root") ?: error("Couldn't find root container!")
-
-    render(Fragment.create {
-        h1 {
-            +"Hello, React+Kotlin/JS!"
-        }
-        div {
-            h3 {
-                +"Videos to watch"
-            }
-            for (video in unwatchedVideos) {
-                p {
-                    +"${video.speaker}: ${video.title}"
-                }
-            }
-
-            h3 {
-                +"Videos watched"
-            }
-            for (video in watchedVideos) {
-                p {
-                    +"${video.speaker}: ${video.title}"
-                }
-            }
-        }
-        div {
-            css {
-                position = Position.absolute
-                top = 10.px
-                right = 10.px
-            }
-            h3 {
-                +"John Doe: Building and breaking things"
-            }
-            img {
-                src = "https://via.placeholder.com/640x360.png?text=Video+Player+Placeholder"
-            }
-        }
-    }, container)
+    render(App.create(), container)
 }
